@@ -1,0 +1,47 @@
+{% set prev = (prev is defined and prev) ? prev : null %}
+{% set next = (next is defined and next) ? next : null %}
+
+
+{% set isContao5 = is_contao5 %}
+{#{{ contao_major }} {{ is_contao5 ? 'C5' : 'C4' }}#}
+
+<nav class="next-prev-nav" aria-label="Vor- und Zurück-Navigation">
+
+    {% if prev %}
+        <a class="next-prev__link next-prev__link--prev" href="{{ prev.href }}">
+            <span class="next-prev__label">
+                <svg class="svg-icon-prev" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"></path>
+                </svg></span>
+
+            {% if prev.image is defined and prev.image and prev.image.from is defined and prev.image.from %}
+                {% if isContao5 %}
+                    {% include "@Contao/_nav_image_c5.html.twig" with { img: prev.image } only %}
+                {% else %}
+                    {% include "@Contao/_nav_image_c4.html.twig" with { img: prev.image } only %}
+                {% endif %}
+            {% endif %}
+
+            <span class="next-prev__title">{{ prev.title }}</span>
+        </a>
+    {% endif %}
+
+    {% if next %}
+        <a class="next-prev__link next-prev__link--next" href="{{ next.href }}">
+
+            {% if next.image is defined and next.image and next.image.from is defined and next.image.from %}
+                {% if isContao5 %}
+                    {% include "@Contao/_nav_image_c5.html.twig" with { img: next.image } only %}
+                {% else %}
+                    {% include "@Contao/_nav_image_c4.html.twig" with { img: next.image } only %}
+                {% endif %}
+            {% endif %}
+
+            <span class="next-prev__title">{{ next.title }}</span>
+            <span class="next-prev__label"><svg class="svg-icon-next" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"></path>
+                </svg></span>
+        </a>
+    {% endif %}
+
+</nav>

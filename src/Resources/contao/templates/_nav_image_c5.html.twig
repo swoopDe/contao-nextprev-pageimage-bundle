@@ -1,0 +1,11 @@
+{% use "@Contao/component/_figure.html.twig" %}
+
+{% set fig = figure(
+    img.from,
+    (img.size is defined ? img.size : null),
+    { metadata: { alt: (img.alt is defined ? img.alt : '') } }
+    ) %}
+
+{% if fig %}
+    {% with { figure: fig } %}{{ block('figure_component') }}{% endwith %}
+{% endif %}
