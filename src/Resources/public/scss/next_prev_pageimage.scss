@@ -12,11 +12,16 @@
         box-shadow: 0 0.5px 2.5px rgba(0, 0, 0, 0.1);
     }
     .next-prev__link{
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5em;
+        white-space: nowrap;        // verhindert Umbruch im Link
         border: 1px solid oklch(0.97466 0.011 259.822);
         border-radius: 0.4em;
         .next-prev__title{
             padding: 0.5em 1em 0.5em 0.5em;
             margin-right: -0.5em;
+            white-space: nowrap;        // verhindert Umbruch im Titel
         }
         svg {
             display: flex;
