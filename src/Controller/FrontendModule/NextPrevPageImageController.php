@@ -206,16 +206,32 @@ class NextPrevPageImageController
 
         $size = StringUtil::deserialize($raw, true);
 
-        // Falls imageSize-Widget ein leeres Array liefert: ignorieren
         if (is_array($size)) {
-            $size = array_map(static fn($v) => is_string($v) ? trim($v) : $v, $size);
+            $size = array_values(array_map(static function ($v) {
+                return is_string($v) ? trim($v) : $v;
+            }, $size));
 
-            // alle Werte leer -> keine Größe gesetzt
+            // komplett leer?
             if (count(array_filter($size, static fn($v) => $v !== '' && $v !== null)) === 0) {
                 return null;
             }
 
-            return $size; // z.B. [400,300,'crop'] oder ['_foo', ...] je nach Auswahl
+            // Spezialfall: nur eine Bildgroessen-ID wurde gewaehlt -> ["", "", "6"]
+            if (
+                count($size) >= 3
+                && ($size[0] === '' || $size[0] === null)
+                && ($size[1] === '' || $size[1] === null)
+                && is_numeric($size[2])
+            ) {
+                return [0, 0, (int) $size[2]];
+            }
+
+            // Strings "0" etc. sauber casten (optional, aber hilfreich)
+            if (isset($size[0]) && is_numeric($size[0])) $size[0] = (int) $size[0];
+            if (isset($size[1]) && is_numeric($size[1])) $size[1] = (int) $size[1];
+            if (isset($size[2]) && is_numeric($size[2])) $size[2] = (int) $size[2];
+
+            return $size;
         }
 
         if (is_string($raw) && trim($raw) !== '') {
@@ -224,5 +240,6 @@ class NextPrevPageImageController
 
         return null;
     }
+
 
 }
