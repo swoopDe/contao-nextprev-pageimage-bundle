@@ -18,6 +18,10 @@
         white-space: nowrap;        // verhindert Umbruch im Link
         border: 1px solid oklch(0.97466 0.011 259.822);
         border-radius: 0.4em;
+        figure {
+            padding: 0;
+            margin: 0;
+        }
         .next-prev__title{
             padding: 0.5em 1em 0.5em 0.5em;
             margin-right: -0.5em;

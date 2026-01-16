@@ -18,6 +18,10 @@
   border: 1px solid oklch(97.466% 0.011 259.822deg);
   border-radius: 0.4em;
 }
+.next-prev-nav .next-prev__link figure {
+  padding: 0;
+  margin: 0;
+}
 .next-prev-nav .next-prev__link .next-prev__title {
   padding: 0.5em 1em 0.5em 0.5em;
   margin-right: -0.5em;
