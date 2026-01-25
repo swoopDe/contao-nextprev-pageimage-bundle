@@ -17,6 +17,7 @@
   white-space: nowrap;
   border: 1px solid oklch(97.466% 0.011 259.822deg);
   border-radius: 0.4em;
+  line-height: 1;
 }
 .next-prev-nav .next-prev__link figure {
   padding: 0;
